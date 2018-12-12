@@ -1,0 +1,85 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    // geo
+    var country_calling_code = null;
+
+    (function() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://ipapi.co/json/',
+            dataType: 'json',
+            success: function(response) {
+                $('[name="geo"]').val(response.city);
+                $('[name="city"]').val(response.country_name);
+                $('[name="country"]').val(response.country);
+                country_calling_code = response.country_calling_code;
+            }
+        })
+    })()
+    // end geo
+     var user = JSON.parse(localStorage.getItem('fr-user'));
+
+    if (user) {
+        // здесь заполняем input 
+        if (user.name !== 'undefined') {
+            $('form input[name="name"]').val(user.name);
+        }
+        if (user.email !== 'undefined') {
+            $('form input[name="email"]').val(user.email);
+        }
+        if (user.phone !== 'undefined') {
+            $('form input[name="phone"]').val(user.phone);
+        }
+    }
+
+    function ajaxindicatorstart(text) {
+        $('[type="submit"]').hide();
+        $('#resultLoadingText').text(text)
+        $('#resultLoading').fadeIn(300);
+    }
+
+    function ajaxindicatorstop() {
+        $('[type="submit"]').show()
+        $('#resultLoading').fadeOut(300);
+    }
+
+    $('[name="phone"]').click(function(){
+        var value = $(this).val();
+        var code = country_calling_code;
+
+        if (value === '' && code !== null) {
+            $(this).val(code);
+        }
+    })
+
+    // form
+    $('.ajaxform').submit(function(e) {
+        e.preventDefault();
+        
+        var data = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://skillme.webdepartament.com/lead/add/',
+            dataType: 'json',
+            data,
+            beforeSend: function() {
+                ajaxindicatorstart('Отправка данных...');
+            },
+            success: function(response){
+                 localStorage.setItem('fr-user', JSON.stringify({
+                            name: $("form input[name='name']").val(),
+                            email: $("form input[name='email']").val(),
+                            phone: $("form input[name='phone']").val()
+                        }));
+                // ajaxindicatorstart('Спасибо. Вы успешно зарегистрировались.');
+            window.location.href = response['redirect']; // пишeм чтo всe oк
+
+            }
+        });
+    });
+});
+</script>
