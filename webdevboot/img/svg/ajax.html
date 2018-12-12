@@ -1,0 +1,65 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    // geo
+    var country_calling_code = null;
+
+    (function() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://ipapi.co/json/',
+            dataType: 'json',
+            success: function(response) {
+                $('[name="geo"]').val(response.city);
+                $('[name="city"]').val(response.country_name);
+                $('[name="country"]').val(response.country);
+                country_calling_code = response.country_calling_code;
+            }
+        })
+    })()
+    // end geo
+
+    function ajaxindicatorstart(text) {
+        $('[type="submit"]').hide();
+        $('#resultLoadingText').text(text)
+        $('#resultLoading').fadeIn(300);
+    }
+
+    function ajaxindicatorstop() {
+        $('[type="submit"]').show()
+        $('#resultLoading').fadeOut(300);
+    }
+
+    $('[name="phone"]').click(function(){
+        var value = $(this).val();
+        var code = country_calling_code;
+
+        if (value === '' && code !== null) {
+            $(this).val(code);
+        }
+    })
+
+    // form
+    $('.ajaxform').submit(function(e) {
+        e.preventDefault();
+        
+        var data = getParams + '&' + $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://skillme.webdepartament.com/lead/add/',
+            dataType: 'json',
+            data,
+            beforeSend: function() {
+                ajaxindicatorstart('Отправка данных...');
+            },
+            success: function(response){
+                // ajaxindicatorstart('Спасибо. Вы успешно зарегистрировались.');
+
+            }
+        });
+    });
+});
+</script>
