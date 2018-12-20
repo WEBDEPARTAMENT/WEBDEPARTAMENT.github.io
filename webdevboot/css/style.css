@@ -836,6 +836,12 @@ button.wrbt:hover {
 	background-size: cover;
 }
 
+/*-----------LP--------*/
+.wr_header_port{
+	background-image: url(../img/port2.jpg);
+	background-size: cover;
+}
+
 
 
 
