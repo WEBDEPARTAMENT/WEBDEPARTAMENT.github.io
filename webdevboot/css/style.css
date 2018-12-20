@@ -836,9 +836,15 @@ button.wrbt:hover {
 	background-size: cover;
 }
 
-/*-----------LP--------*/
+/*-----------portal--------*/
 .wr_header_port{
 	background-image: url(../img/port2.jpg);
+	background-size: cover;
+}
+
+/*-----------wow--------*/
+.wr_header_port{
+	background-image: url(../img/wow2.jpg);
 	background-size: cover;
 }
 
