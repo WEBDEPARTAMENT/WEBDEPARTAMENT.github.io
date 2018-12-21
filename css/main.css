@@ -432,6 +432,12 @@ body {
 
 
 /**/
+  .centerTitle__text>h2{
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-family: diariaPro-Regular;
+    margin-bottom: 280px
+  }
 .price {
     position: relative;
     padding: 100px 0;
@@ -676,12 +682,6 @@ button:active {
   text-align: center; }
 
 @media (max-width: 1490px) {
-    .centerTitle__text>h2{
-    font-size: 20px;
-    letter-spacing: 1px;
-    font-family: diariaPro-Regular;
-    margin-bottom: 20px;
-  }
   .centerTitle__description {
     margin-top: 5rem;
     min-width: 95rem; } }
@@ -737,7 +737,7 @@ button:active {
     font-size: 20px;
     letter-spacing: 1px;
     font-family: diariaPro-Regular;
-    margin-bottom: 20px;
+    margin-bottom: 20px
   }
 
 }
