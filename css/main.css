@@ -436,7 +436,8 @@ body {
     font-size: 20px;
     letter-spacing: 1px;
     font-family: diariaPro-Regular;
-    margin-bottom: 280px
+    margin-bottom: 280px;
+
   }
 .price {
     position: relative;
@@ -737,7 +738,7 @@ button:active {
     font-size: 20px;
     letter-spacing: 1px;
     font-family: diariaPro-Regular;
-    margin-bottom: 20px
+    margin-bottom: 20px;
   }
 
 }
