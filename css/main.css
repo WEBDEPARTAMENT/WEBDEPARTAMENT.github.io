@@ -2538,7 +2538,7 @@ button:active {
   .header__mobile-link {
     display: block; } }
 .header__mobile-link--active {
-  left: 2rem; }
+/*  left: 2rem;*/ }
 .header__mobile-link--active::before {
   -ms-transform: rotate(40deg);
   transform: rotate(40deg); }
